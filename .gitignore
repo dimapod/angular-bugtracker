@@ -1,6 +1,9 @@
-*.class
+**/.DS_Store
+nbproject
+manifest.mf
+build.xml
 
-# Package Files #
-*.jar
-*.war
-*.ear
+.project
+.settings
+.idea/*
+*.iml
