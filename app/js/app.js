@@ -22,6 +22,10 @@ var bugTrackerApp = angular.module('bugTrackerApp', ['ngResource', 'ngSanitize']
             .when('/help', {
                 templateUrl: 'partials/help.html'
             })
+            .when('/user', {
+                controller: 'userCtrl',
+                templateUrl: 'partials/user.html'
+            })
             .otherwise({
                 redirectTo: '/issue'
             });

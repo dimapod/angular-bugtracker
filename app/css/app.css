@@ -32,8 +32,13 @@
 }
 
 /****************************************
- * Wall css                             *
+ * User css                             *
  ****************************************/
+.btr-login-bkg {
+    background-image: url(../img/bugtracker.jpg);
+    opacity: 0.4;
+    height: 705px;
+}
 
 .tweet {
     transition: all ease 1s;

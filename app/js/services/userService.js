@@ -6,7 +6,8 @@ bugTrackerApp.factory('user', function ($rootScope, localStorage) {
         customerString = localStorage[LOCAL_STORAGE_ID];
 
     var configuration = customerString ? JSON.parse(customerString) : {
-        params: []
+        login: undefined,
+        name: undefined
     };
 
     $rootScope.$watch(function () {
