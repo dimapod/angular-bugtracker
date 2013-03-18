@@ -1,12 +1,15 @@
 'use strict';
 
-bugTrackerApp.factory('issue', function () {
+bugTrackerApp.factory('issueService', function () {
 
-    function todo() {
+    function addIssue(issue) {
+        console.log("POST new issue: " + issue);
+
+        //return future from resource;
     };
 
     // Public APIs
     return {
-        todo: todo
+        addIssue: addIssue
     };
 });

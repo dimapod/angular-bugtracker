@@ -8,7 +8,7 @@ var bugTrackerApp = angular.module('bugTrackerApp', ['ngResource', 'ngSanitize']
                 controller: 'issueCtrl'
             })
             .when('/add', {
-                templateUrl: 'partials/add_issue.html',
+                templateUrl: 'partials/add-issue.html',
                 controller: 'addIssueCtrl'
             })
             .when('/edit', {

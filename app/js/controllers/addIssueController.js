@@ -1,14 +1,16 @@
 'use strict';
 
-bugTrackerApp.controller('addIssueCtrl', function ($scope, user) {
+bugTrackerApp.controller('addIssueCtrl', function ($scope, user, issueService, $location) {
 
-    $scope.issue = { id: 123, date: new Date() }
-    $scope.user = user;
-
-    console.log()
+    $scope.issue = { id: 123, date: new Date(), reporter: user.login }
+    $scope.submitting = false;
 
     $scope.add = function () {
-        console.log("Add new issue: " + $scope.issue);
+        if ($scope.submitting) return;
+        $scope.submitting = true;
+
+        issueService.addIssue($scope.issue);
+        $location.url('/issue');
     }
 
 });

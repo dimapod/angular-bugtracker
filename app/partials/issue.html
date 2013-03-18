@@ -6,5 +6,27 @@
     <div>
         <a class="btn btn-primary" ng-href="#/add">Report new issue</a>
 
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Version</th>
+                    <th>Summary</th>
+                    <th>Reporter</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="issue in issues">
+                    <td>{{issue.id}}</td>
+                    <td>{{issue.product}}</td>
+                    <td>{{issue.version}}</td>
+                    <td>{{issue.summary}}</td>
+                    <td>{{issue.reporter}}</td>
+                    <td style="color: red">{{issue.severity}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

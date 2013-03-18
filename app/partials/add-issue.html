@@ -5,7 +5,7 @@
         <fieldset>
             <legend>Issue #{{ issue.id }}</legend>
 
-            <div>Reporter: {{ user.login }}</div>
+            <div>Reporter: {{ issue.reporter }}</div>
             <div>Date: {{ issue.date | date:'dd/MM/yyyy - hh:mm' }}</div>
 
             <label for="product">Product name:</label>
@@ -22,7 +22,7 @@
                 <option value="block">Block</option>
             </select>
 
-            <label >Priority:</label>
+            <label>Priority:</label>
             <btr-rating ng-model="issue.priority"></btr-rating>
 
             <label for="summary">Summary:</label>
@@ -32,8 +32,8 @@
             <textarea id="description" class="span11" rows="7" ng-model="issue.description" type="text"></textarea>
 
             <div class="control-group">
-                <a class="btn btn-primary">Submit</a>
-                <a class="btn">Cancel</a>
+                <a class="btn btn-primary" ng-click="add();" ng-disabled="submitting">Submit</a>
+                <a class="btn" ng-href="#/issue">Cancel</a>
             </div>
         </fieldset>
     </form>
