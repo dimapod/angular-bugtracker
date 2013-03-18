@@ -40,6 +40,11 @@
     height: 705px;
 }
 
+.btr-login {
+    padding: 0px 0px 10px 0px;
+    text-align: right;
+}
+
 .tweet {
     transition: all ease 1s;
     -moz-transition: all ease 1s;
