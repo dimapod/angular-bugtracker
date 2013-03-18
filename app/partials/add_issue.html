@@ -1,4 +1,41 @@
-<div class="fm-panel">
+<div class="btr-panel">
     <h4>New issue</h4>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Issue #{{ issue.id }}</legend>
+
+            <div>Reporter: {{ user.login }}</div>
+            <div>Date: {{ issue.date | date:'dd/MM/yyyy - hh:mm' }}</div>
+
+            <label for="product">Product name:</label>
+            <input id="product" ng-model="issue.product" type="text">
+
+            <label for="version">Version:</label>
+            <input id="version" ng-model="issue.version" type="text">
+
+            <label for="severity">Severity:</label>
+            <select id="severity" ng-model="issue.severity">
+                <option value="minor">Minor</option>
+                <option value="major" selected>Major</option>
+                <option value="crash">Crash</option>
+                <option value="block">Block</option>
+            </select>
+
+            <label >Priority:</label>
+            <btr-rating ng-model="issue.priority"></btr-rating>
+
+            <label for="summary">Summary:</label>
+            <input id="summary" class="span11" ng-model="issue.summary" type="text">
+
+            <label for="description">Description:</label>
+            <textarea id="description" class="span11" rows="7" ng-model="issue.description" type="text"></textarea>
+
+            <div class="control-group">
+                <a class="btn btn-primary">Submit</a>
+                <a class="btn">Cancel</a>
+            </div>
+        </fieldset>
+    </form>
 
 </div>

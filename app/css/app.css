@@ -2,7 +2,7 @@
  * general purpose css-only components  *
  ****************************************/
 
-.fm-panel {
+.btr-panel {
     background-color: #fff;
 
     border: 1px solid black;
@@ -21,7 +21,7 @@
     overflow: hidden;
 }
 
-.fm-panel > h4 {
+.btr-panel > h4 {
     background-color: #E5E5E5;
     margin: -10px -10px 10px -10px;
     padding: 10px 10px 10px 10px;
@@ -64,4 +64,52 @@
 
 .active {
     background-color: #f4f4f4;
+}
+
+/****************************************
+ * Rating                               *
+ ****************************************/
+
+.btr-rating {
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+
+}
+
+ul.btr-rating {
+    display: inline-block;
+}
+
+.btr-rating-pointer {
+    cursor: pointer;
+}
+
+.btr-rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btr-rating .btr-selected {
+    color: #000000;
+}
+
+.btr-rating .btr-hover {
+    text-shadow: white 0 0  2px,
+    white 0 0  2px,
+    white 0 0  2px,
+    white 0 0  2px,
+    blue  0 0 10px;
+}
+
+btr-rating a {
+    visibility: hidden;
+    padding-left: 7px;
+}
+
+btr-rating:hover a {
+    visibility: visible;
 }
