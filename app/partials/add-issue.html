@@ -9,13 +9,7 @@
                 <label class="control-label" for="reporter">Reporter</label>
                 <div class="controls">
                     <input type="text" id="reporter" ng-model="issue.reporter" ng-readonly="readonly">
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="date">Date</label>
-                <div class="controls">
-                    <input type="text" id="date" ng-model="issue.date" ng-readonly="readonly">
+                    &nbsp;Date:  {{issue.date | date:'dd/MM/yyyy - hh:mm'}}
                 </div>
             </div>
 
