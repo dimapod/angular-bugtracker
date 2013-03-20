@@ -113,3 +113,7 @@ btr-rating a {
 btr-rating:hover a {
     visibility: visible;
 }
+
+.resolved {
+    text-decoration: line-through;
+}
