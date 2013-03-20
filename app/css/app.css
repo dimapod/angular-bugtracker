@@ -114,6 +114,10 @@ btr-rating:hover a {
     visibility: visible;
 }
 
-.resolved {
-    text-decoration: line-through;
-}
+tr.resolved { text-decoration: line-through; }
+td.minor { color: #adff2f; }
+td.major { color: #0088cc; }
+td.crash { color: orange; }
+td.block { color: red; }
+
+

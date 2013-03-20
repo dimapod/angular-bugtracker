@@ -1,15 +1,16 @@
 'use strict';
 
 bugTrackerApp.controller('addIssueCtrl', function ($scope, user, issueService, $location) {
-
-    $scope.issue = { id: 123, date: new Date(), reporter: user.login, status: "new" }
+    $scope.readonly = false;
     $scope.submitting = false;
+
+    $scope.issue = { id: issueService.getNextId(), date: new Date(), reporter: user.login, status: "new" }
 
     $scope.add = function () {
         if ($scope.submitting) return;
         $scope.submitting = true;
 
-        issueService.addIssue($scope.issue);
+        issueService.save($scope.issue);
         $location.url('/issue');
     }
 
