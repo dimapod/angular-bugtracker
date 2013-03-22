@@ -6,6 +6,7 @@ bugTrackerApp.controller('editCtrl', function ($scope, $routeParams, $location, 
 
     // todo: fetch from resource
     $scope.issue = issueService.get($routeParams.issueId);
+    $scope.newComment = "";
 
     // todo: fetch from resource
     $scope.comments = [
