@@ -16,7 +16,7 @@
             <div class="control-group">
                 <label class="control-label" for="product">Product name</label>
                 <div class="controls">
-                    <input type="text" id="product" ng-model="issue.product" ng-readonly="readonly">
+                    <input type="text" id="product" ng-model="issue.product" ng-readonly="readonly" required>
                 </div>
             </div>
 
@@ -30,9 +30,9 @@
             <div class="control-group">
                 <label class="control-label" for="severity">Severity</label>
                 <div class="controls">
-                    <select id="severity" ng-model="issue.severity" ng-readonly="readonly">
+                    <select id="severity" ng-model="issue.severity" ng-readonly="readonly" required>
                         <option value="minor">Minor</option>
-                        <option value="major" selected>Major</option>
+                        <option value="major">Major</option>
                         <option value="crash">Crash</option>
                         <option value="block">Block</option>
                     </select>
@@ -49,7 +49,7 @@
             <div class="control-group">
                 <label class="control-label" for="summary">Summary</label>
                 <div class="controls">
-                    <input id="summary" class="span8" ng-model="issue.summary" type="text" ng-readonly="readonly">
+                    <input id="summary" class="span8" ng-model="issue.summary" type="text" ng-readonly="readonly" required>
                 </div>
             </div>
 
