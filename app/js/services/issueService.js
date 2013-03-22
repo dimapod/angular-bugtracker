@@ -3,9 +3,6 @@
 bugTrackerApp.factory('issueService', function (issueResource) {
 
     // Mock
-    var nextId = 123;
-
-    // Mock
     var issues = issueResource.query();
 
     function query() {
@@ -30,17 +27,11 @@ bugTrackerApp.factory('issueService', function (issueResource) {
         issues[0] = issue
     }
 
-    // Mock
-    function getNextId() {
-        return nextId ++;
-    }
-
     // Public APIs
     return {
         query: query,
         get: get,
         save: save,
-        edit: edit,
-        getNextId: getNextId
+        edit: edit
     };
 });

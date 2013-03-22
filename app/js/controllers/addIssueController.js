@@ -4,7 +4,7 @@ bugTrackerApp.controller('addIssueCtrl', function ($scope, user, issueService, $
     $scope.readonly = false;
     $scope.submitting = false;
 
-    $scope.issue = { id: issueService.getNextId(), date: new Date(), reporter: user.login, status: "new" }
+    $scope.issue = { id: 123, date: new Date(), reporter: user.login, status: "new" }
 
     $scope.add = function () {
         if ($scope.submitting) return;

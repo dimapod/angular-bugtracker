@@ -3,7 +3,7 @@
 
     <form class="form-horizontal">
         <fieldset>
-            <!--<legend>Issue #{{ issue.id }}</legend>-->
+            <legend>Details</legend>
 
             <div class="control-group">
                 <label class="control-label" for="reporter">Reporter</label>
@@ -73,11 +73,25 @@
             </div>
 
             <div class="control-group">
+                <div class="control-label">New comment</div>
+                <div class="controls">
+                    <textarea class="span8" rows="2" type="text"></textarea>
+                </div>
+            </div>
+
+            <div class="control-group">
                 <div class="controls">
                     <a class="btn btn-primary" ng-click="edit();" ng-disabled="submitting">Submit</a>
                     <a class="btn" ng-href="#/issue">Cancel</a>
                 </div>
             </div>
         </fieldset>
+
+        <div class="legend">Comments ({{comments.length}})</div>
+        <div class="comment" ng-repeat="comment in comments">
+            <div>By <b>{{comment.reporter}}</b> on {{comment.date | date}}</div>
+            <textarea class="span9" type="text" ng-bind="comment.comment" disabled></textarea>
+        </div>
+
     </form>
 </div>
