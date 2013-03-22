@@ -10,7 +10,7 @@ bugTrackerApp.factory('issueService', function (issueResource) {
 
     function query() {
         //return issues
-        return issueResource.query()
+        return issues;
     }
 
     // Mock

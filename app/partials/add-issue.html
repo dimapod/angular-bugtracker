@@ -1,20 +1,20 @@
 <div class="btr-panel">
     <h4>New issue: #{{ issue.id }}</h4>
 
-    <form class="form-horizontal">
+    <form name="issueForm" class="form-horizontal">
         <fieldset>
             <!--<legend>Issue #{{ issue.id }}</legend>-->
 
             <div class="control-group">
                 <label class="control-label" for="reporter">Reporter</label>
                 <div class="controls">
-                    <input type="text" id="reporter" ng-model="issue.reporter" ng-readonly="readonly">
+                    <input type="text" id="reporter" ng-model="issue.reporter" ng-readonly="false">
                     &nbsp;Date:  {{issue.date | date:'dd/MM/yyyy - hh:mm'}}
                 </div>
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="product">Product name</label>
+                <label class="control-label" for="product">* Product name</label>
                 <div class="controls">
                     <input type="text" id="product" ng-model="issue.product" ng-readonly="readonly" required>
                 </div>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="severity">Severity</label>
+                <label class="control-label" for="severity">* Severity</label>
                 <div class="controls">
                     <select id="severity" ng-model="issue.severity" ng-readonly="readonly" required>
                         <option value="minor">Minor</option>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="summary">Summary</label>
+                <label class="control-label" for="summary">* Summary</label>
                 <div class="controls">
                     <input id="summary" class="span8" ng-model="issue.summary" type="text" ng-readonly="readonly" required>
                 </div>
@@ -62,7 +62,7 @@
 
             <div class="control-group">
                 <div class="controls">
-                    <a class="btn btn-primary" ng-click="add();" ng-disabled="submitting">Submit</a>
+                    <a class="btn btn-primary" ng-click="add();" type="submit" ng-disabled="submitting || issueForm.$invalid">Submit</a>
                     <a class="btn" ng-href="#/issue">Cancel</a>
                 </div>
             </div>
