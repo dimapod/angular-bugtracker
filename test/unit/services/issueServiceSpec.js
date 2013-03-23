@@ -2,12 +2,12 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('issue service', function(){
+xdescribe('issue service', function(){
     var issueService;
 
     beforeEach(function() {
         inject(function($injector) {
-            issueService = $injector.get('issue');
+            issueService = $injector.get('issueService');
         });
     });
 

@@ -1,55 +1,43 @@
 'use strict';
 
+// -> use ddescribe(...) to execute only one given test suite
+//    use xdescribe(...) to disable given test suite
 describe('btrLogin directive', function () {
-    var user, element;
+    var user, element, compile, rootScope;
 
-    //beforeEach(module('app/js/directives/btrLogin.html'));
+    beforeEach(function() {
+        module(function ($provide) {
+            user = {};
+            $provide.value('user', user);
+        })
 
-    beforeEach(module(function ($provide) {
-        user = {};
-        $provide.value('user', user);
-    }));
+        inject(function ($compile, $rootScope) {
+            compile = $compile;
+            rootScope = $rootScope;
 
-    beforeEach(inject(function ($compile, $rootScope) {
-        element = $compile('<btr-login></btr-login>')($rootScope);
-        $rootScope.$apply();
-    }));
+            element = $compile('<btr-login></btr-login>')($rootScope);
+        })
+    });
 
-
-//    beforeEach(function() {
-//        // load template into $templateCache
-//        module('app/js/directives/btrLogin.html');
-//
-//        module(function ($provide) {
-//            user = {};
-//            $provide.value('user', user);
-//        });
-//
-//        inject(function ($compile, $rootScope) {
-//            element = $compile('<btr-login></btr-login>')($rootScope);
-//            $rootScope.$apply();
-//        })
-//    });
-
-
-    xit("should display user's login", inject(function ($compile, $rootScope, user) {
+    // -> use iit(...) to execute only one given test
+    //    use xit(...) to disable the given test
+    it("should display user's login", function() {
         user.login = "firstUser";
-        $rootScope.$apply();
+        rootScope.$apply();
 
-        expect(element.text()).toMatch(/firstUser/);
+        expect(element.text()).toBe("firstUser | Logout")
 
         user.login = "changedUser";
-        $rootScope.$apply();
+        rootScope.$apply();
 
-        expect(element.text()).toMatch(/changedUser/);
-    }));
+        expect(element.text()).toBe("changedUser | Logout")
+    });
 
-
-    xit("should display a link to logout", inject(function ($compile, $rootScope) {
+    it("should display a link to logout", function() {
         var anchor = element.find('a');
 
         expect(anchor.attr('href')).toBe('#/user');
-        expect(anchor.text()).toBe('Change');
-    }));
+        expect(anchor.text()).toBe('Logout');
+    });
 
 });
