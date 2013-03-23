@@ -1,50 +1,33 @@
 'use strict';
 
-describe('user service', function(){
-    var userService, localStorage;
+describe('userService', function() {
+    var user, localStorage, $rootScope;
 
     beforeEach(module(function($provide) {
         localStorage = {
+            configuration: '{"login":"init-login","name":"Init User Name"}'
         };
+
         $provide.value('localStorage', localStorage);
     }));
 
-    beforeEach(function() {
-        inject(function($injector) {
-            userService = $injector.get('user');
+    beforeEach(inject(function(_user_, _$rootScope_) {
+        user = _user_;
+        $rootScope = _$rootScope_;
+    }));
+
+    it('should update any change to localStorage', function() {
+        $rootScope.$apply(function() {
+            user.login = 'asmith';
+            user.name = 'Adam Smith';
         });
+
+        expect(localStorage.configuration).toBe('{"login":"asmith",' +
+            '"name":"Adam Smith"}');
     });
 
-    // -> use iit(...) to execute only one given test
-    //    use xit(...) to disable the given test
-    it('should have userService defined', function() {
-        expect(userService).toBeDefined();
-    });
-
-    xit('should load empty array when localstorage is empty', function() {
-
-        var data = configTweet.loadTweetConfig();
-        expect(data).toEqual([]);
-    });
-
-    xit('should save data into locastorage', function() {
-
-        var data = configTweet.saveTweetConfig('testSave');
-        expect(data).toEqual([{type : 'hash', value: 'testSave'}]);
-    });
-
-    xit('should load data when localstorge is not empty', function() {
-
-        configTweet.saveTweetConfig('testSave');
-        var data = configTweet.loadTweetConfig();
-        expect(data).toEqual([{type : 'hash', value: 'testSave'}]);
-    });
-
-    xit('should remove data from locastorage', function() {
-
-        configTweet.saveTweetConfig('testSave');
-        var data = configTweet.removeHashTag(0);
-        expect(data).toEqual([]);
+    it('should load initial value from localStorage', function() {
+        expect(user.login).toBe('init-login');
+        expect(user.name).toBe('Init User Name');
     });
 });
-
