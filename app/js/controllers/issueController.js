@@ -6,5 +6,4 @@ bugTrackerApp.controller('issueCtrl', function ($scope, user, $location, issueSe
     }
 
     $scope.issues = issueService.query();
-
 });
