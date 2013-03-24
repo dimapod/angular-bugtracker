@@ -28,7 +28,7 @@ describe('E2E test suite', function () {
     describe('menu navigation', function () {
         describe('menu configuration', function () {
             beforeEach(function () {
-                browser().navigateTo('../../app/index.html#/help');
+                browser().navigateTo('../../app/index.html#/about');
             });
 
             it('should go to Issues view', function () {
@@ -49,7 +49,7 @@ describe('E2E test suite', function () {
 
         describe('menu archive', function () {
             beforeEach(function () {
-                browser().navigateTo('../../app/index.html#/help');
+                browser().navigateTo('../../app/index.html#/about');
             });
 
             it('should go to archive view', function () {
@@ -68,24 +68,24 @@ describe('E2E test suite', function () {
             });
         });
 
-        describe('menu help', function () {
+        describe('menu about', function () {
             beforeEach(function () {
                 browser().navigateTo('../../app/index.html#/issue');
             });
 
             it('should go to issue view', function () {
-                element('#help a').click();
-                expect(browser().location().url()).toBe('/help');
+                element('#about a').click();
+                expect(browser().location().url()).toBe('/about');
             });
 
-            it('should add class .active to help menu item (li tag)', function () {
-                expect(element('#help.active').count()).toBe(0);
+            it('should add class .active to about menu item (li tag)', function () {
+                expect(element('#about.active').count()).toBe(0);
 
-                element('#help a').click();
+                element('#about a').click();
 
-                // expect .active class to be set only for help menu item
+                // expect .active class to be set only for about menu item
                 expect(element('.active').count()).toBe(1);
-                expect(element('#help.active').count()).toBe(1);
+                expect(element('#about.active').count()).toBe(1);
             });
         });
     });
