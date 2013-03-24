@@ -3,26 +3,19 @@
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
 describe('user controller', function(){
-    var $scope, user, locationUrlMock
+    var $scope, user, $location
 
     beforeEach(function() {
-        // $location service mock
-        var $location = {
-            url: function(url) { }
-        }
-
         // user service mock
         user = { login: "testLogin", name: "Test User Name" }
 
-        locationUrlMock = spyOn($location, 'url')
-
         module(function($provide) {
-            $provide.value('$location', $location);
             $provide.value('user', user);
         });
 
-        inject(function($injector, $controller, $rootScope) {
+        inject(function($injector, $controller, $rootScope, _$location_) {
             $controller('userCtrl', {$scope: $scope = $rootScope.$new()});
+            $location = _$location_;
         });
     });
 
@@ -46,7 +39,7 @@ describe('user controller', function(){
 
     it('should call $location.url() when doLogin()', function() {
         $scope.doLogin("newLogin", "New User Name")
-        expect(locationUrlMock).toHaveBeenCalledWith("/");
+        expect($location.url()).toEqual('/');
     });
 
 });
