@@ -11,11 +11,12 @@ describe('menu controller', function(){
             path: function() { return "/path" }
         }
 
-        // ConfigTweet mock
-        var configTweet = { config: { frequency: 1000, params:[ {type : 'hash', value: 'test'} ] } }
+        module(function($provide) {
+            $provide.value('$location', $location);
+        });
 
         inject(function($injector, $controller, $rootScope) {
-            $controller('menuCtrl', {$scope: $scope = $rootScope.$new(), $location: $location});
+            $controller('menuCtrl', {$scope: $scope = $rootScope.$new()});
         });
     });
 
