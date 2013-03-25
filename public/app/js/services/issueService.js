@@ -1,31 +1,27 @@
 'use strict';
 
-bugTrackerApp.factory('issueService', function (issueResource) {
+bugTrackerApp.factory('issueService', function (issueResource, commentResource) {
 
-    // Mock
-    var issues = issueResource.query();
 
     function query() {
-        //return issues
-        return issues;
+        return issueResource.query();;
     }
 
-    // Mock
     function get(issueId) {
-        return issues[0];
+        return issueResource.get({id: issueId});
     }
 
-    // Mock
     function save(issue) {
         console.log("POST new issue: " + issue);
         issueResource.save(issue);
-        //issues.push(issue);
-        //return future from resource;
     };
 
-    // Mock
-    function edit(issue) {
-        issues[0] = issue
+    function edit(issue, id) {
+        commentResource.save(issue, {id: id});
+    }
+
+    function getComments(issueId) {
+        commentResource.get({id: issueId});
     }
 
     // Public APIs
@@ -33,6 +29,7 @@ bugTrackerApp.factory('issueService', function (issueResource) {
         query: query,
         get: get,
         save: save,
-        edit: edit
+        edit: edit,
+        getComments: getComments
     };
 });

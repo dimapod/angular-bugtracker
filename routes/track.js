@@ -1,4 +1,5 @@
 var mongojs = require('mongojs');
+var async = require('async');
 
 var db = mongojs('xke', ['tracks', 'comments', 'sequence'])
 
@@ -16,16 +17,26 @@ exports.getIssueById = function (req, res) {
 };
 
 exports.saveIssue = function (req, res) {
-    console.log('save issue');
-    db.tracks.save(req.body, function (err, doc) {
-        res.send(201, doc);
+    var body = req.body;
+    async.waterfall([
+       function(callback) {
+           nextId(callback);
+       },
+       function(err, doc, next) {
+           body.businessId = doc.value.businessId;
+           db.tracks.save(body, next);
+       }
+    ],
+    function(err, success) {
+        res.send(201, success);
     });
 };
 
 exports.updateIssue = function (req, res) {
     var body = req.body;
-    // db.tracks.findAndModify
-    res.send("respond with a resource");
+    db.tracks.update({_id: req.params.id} , body, function (err, doc){
+        res.send(200, doc);
+    });
 };
 
 exports.getCommentsById = function (req, res) {
@@ -40,4 +51,13 @@ exports.saveComment = function (req, res) {
     db.comments.save(req.body, function (err, doc) {
         res.send(201, doc);
     });
+};
+
+function nextId(callback) {
+    db.sequence.findAndModify({
+        query: {key: 'SPX'},
+        update: { $inc: { businessId: 1 } },
+        upsert: true,
+        new :true
+    }, callback);
 };
