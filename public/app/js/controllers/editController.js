@@ -16,7 +16,9 @@ bugTrackerApp.controller('editCtrl', function ($scope, user, $routeParams, $loca
         $scope.submitting = true;
 
         issueResource.save($scope.issue);
-        commentResource.save({issueId: $scope.issue._id}, $scope.newComment);
+        if ($scope.newComment.comment) {
+            commentResource.save({issueId: $scope.issue._id}, $scope.newComment);
+        }
         $location.url('/issue');
     }
 });
