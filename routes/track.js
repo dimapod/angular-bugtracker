@@ -36,9 +36,9 @@ exports.updateIssue = function (req, res) {
     var body = req.body;
     var ObjectId = mongojs.ObjectId;
 
-    console.log("updateIssue: id=" + req.params.id + "; body=" + body.status);
+    body._id = ObjectId(req.params.id);
+    console.log("updateIssue: id=" + req.params.id);
     db.tracks.update({_id: ObjectId(req.params.id)}, body, function (err, doc){
-        console.log(doc);
         res.send(200);
     });
 };
