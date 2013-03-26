@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 <tr ng-class="issue.status" ng-repeat="issue in issues">
-                    <td><a ng-href="#/edit/{{issue._id}}">{{issue._id}}</a></td>
+                    <td><a ng-href="#/edit/{{issue._id}}">{{issue.businessId}}</a></td>
                     <td>{{issue.status}}</td>
                     <td>{{issue.product}}</td>
                     <td>{{issue.version}}</td>

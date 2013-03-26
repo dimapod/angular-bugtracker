@@ -4,7 +4,7 @@ var async = require('async');
 var db = mongojs('xke', ['tracks', 'comments', 'sequence'])
 
 exports.getIssues = function (req, res) {
-    db.tracks.find({}, {date: 1, reporter: 1, product: 1, version: 1, summary: 1, status: 1}, function (err, docs) {
+    db.tracks.find({}, {}, function (err, docs) {
         res.send(docs);
     });
 };
