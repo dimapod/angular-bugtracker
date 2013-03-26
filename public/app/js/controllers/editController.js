@@ -1,21 +1,22 @@
 'use strict';
 
-bugTrackerApp.controller('editCtrl', function ($scope, $routeParams, $location, issueService) {
+bugTrackerApp.controller('editCtrl', function ($scope, user, $routeParams, $location, issueResource, commentResource) {
     $scope.readonly = true;
     $scope.submitting = false;
 
     // todo: fetch from resource
-    $scope.issue = issueService.get($routeParams.issueId);
-    $scope.newComment = "";
+    $scope.issue = issueResource.get({ id: $routeParams.issueId });
+    $scope.newComment = { reporter: user.login, date: new Date(), comment: "" }
 
     // todo: fetch from resource
-    $scope.comments = issueService.getComments($routeParams.issueId);
+    $scope.comments = commentResource.query({ issueId: $routeParams.issueId });
 
     $scope.edit = function () {
         if ($scope.submitting) return;
         $scope.submitting = true;
 
-        issueService.edit($scope.issue);
+        issueResource.save($scope.issue);
+        commentResource.save({issueId: $scope.issue._id}, $scope.newComment);
         $location.url('/issue');
     }
 });

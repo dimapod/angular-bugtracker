@@ -34,21 +34,27 @@ exports.saveIssue = function (req, res) {
 
 exports.updateIssue = function (req, res) {
     var body = req.body;
-    db.tracks.update({_id: req.params.id} , body, function (err, doc){
-        res.send(200, doc);
+    var ObjectId = mongojs.ObjectId;
+
+    console.log("updateIssue: id=" + req.params.id + "; body=" + body.status);
+    db.tracks.update({_id: ObjectId(req.params.id)}, body, function (err, doc){
+        console.log(doc);
+        res.send(200);
     });
 };
 
 exports.getCommentsById = function (req, res) {
-    db.comments.find({ 'track.$id' : req.params.id}, function (err, docs) {
+    db.comments.find({ 'track.id' : req.params.id}, function (err, docs) {
         res.send(docs);
     });
 };
 
 exports.saveComment = function (req, res) {
     var body = req.body;
-    body.track = {'$ref': 'tracks', '$id' : req.params.id};
+    console.log("saveComment: " + req.params.id + "; body=" + body.comment);
+    body.track = {'ref': 'tracks', 'id' : req.params.id};
     db.comments.save(req.body, function (err, doc) {
+        console.log(err);
         res.send(201, doc);
     });
 };

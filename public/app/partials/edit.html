@@ -1,7 +1,7 @@
-<div class="btr-panel">
+<div class="btr-panel" xmlns="http://www.w3.org/1999/html">
     <h4>Edit issue: #{{ issue.id }}</h4>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-submit="edit()">
         <fieldset>
             <legend>Details</legend>
 
@@ -75,13 +75,13 @@
             <div class="control-group">
                 <div class="control-label">New comment</div>
                 <div class="controls">
-                    <textarea class="span8" type="text" ng-model="newComment"></textarea>
+                    <textarea class="span8" type="text" ng-model="newComment.comment"></textarea>
                 </div>
             </div>
 
             <div class="control-group">
                 <div class="controls">
-                    <a class="btn btn-primary" ng-click="edit(issue.id);" ng-disabled="submitting">Submit</a>
+                    <input type="submit" class="btn btn-primary" ng-disabled="submitting"></input>
                     <a class="btn" ng-href="#/issue">Cancel</a>
                 </div>
             </div>

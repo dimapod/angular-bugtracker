@@ -28,10 +28,10 @@ app.configure('development', function(){
 app.get('/issue', track.getIssues);
 app.get('/issue/:id', track.getIssueById);
 app.post('/issue', track.saveIssue);
-app.put('/issue/:id', track.updateIssue);
+app.post('/issue/:id', track.updateIssue);
 
-app.get('/issue/:id/comments', track.getCommentsById);
-app.post('/issue/:id/comments', track.saveComment);
+app.get('/issue/:id/comment', track.getCommentsById);
+app.post('/issue/:id/comment', track.saveComment);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
