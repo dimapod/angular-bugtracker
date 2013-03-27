@@ -6,20 +6,29 @@
 //    use xdescribe(...) to disable given test suite
 describe('E2E test suite', function () {
 
+    beforeEach(function () {
+        browser().navigateTo('/index.html');
+    });
+
+
     describe('routes', function () {
 
-        describe('default', function () {
+        ddescribe('default', function () {
             // -> use iit(...) to execute only one given test
             //    use xit(...) to disable the given test
             it('should redirect to issue path when route is not known', function () {
 
                 // -> use the fallowing command to pause e2e test
-                // pause();
+                //pause();
 
-                browser().navigateTo('../../app/index.html');
+                input('login').enter('tuser');
+                input('name').enter('Test User');
+                element(':button.btn-primary').click();
+
+
                 expect(browser().location().url()).toBe('/issue');
 
-                browser().navigateTo('../../app/index.html#/unknown_root');
+                browser().navigateTo('#/unknown_root');
                 expect(browser().location().url()).toBe('/issue');
             });
         });
