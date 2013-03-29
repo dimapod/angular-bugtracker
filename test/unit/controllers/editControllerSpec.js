@@ -35,6 +35,7 @@ describe('editController', function(){
             $provide.value('$routeParams', $routeParams);
         });
 
+        // fetch from injector
         inject(function($injector, $controller, $rootScope, _$location_) {
             $controller('editCtrl', {$scope: $scope = $rootScope.$new()});
             $location = _$location_

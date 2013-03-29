@@ -20,6 +20,7 @@ describe('addIssueController', function(){
             $provide.value('user', user);
         });
 
+        // fetch from injector
         inject(function($injector, $controller, $rootScope, _$location_) {
             $controller('addIssueCtrl', {$scope: $scope = $rootScope.$new()});
             $location = _$location_

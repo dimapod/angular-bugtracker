@@ -1,9 +1,12 @@
 'use strict';
 
+// -> use iit(...) to execute only one given test
+//    use xit(...) to disable the given test
 describe('userService', function() {
     var user, localStorage, $rootScope;
 
     beforeEach(module(function($provide) {
+        // Local storage mock
         localStorage = {
             configuration: '{"login":"init-login","name":"Init User Name"}'
         };
@@ -16,7 +19,12 @@ describe('userService', function() {
         $rootScope = _$rootScope_;
     }));
 
+    // -> use iit(...) to execute only one given test
+    //    use xit(...) to disable the given test
     it('should update any change to localStorage', function() {
+        // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
+        // debugger;
+
         $rootScope.$apply(function() {
             user.login = 'asmith';
             user.name = 'Adam Smith';

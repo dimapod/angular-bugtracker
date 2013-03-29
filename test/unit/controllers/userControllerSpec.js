@@ -13,6 +13,7 @@ describe('userController', function(){
             $provide.value('user', user);
         });
 
+        // fetch from injector
         inject(function($injector, $controller, $rootScope, _$location_) {
             $controller('userCtrl', {$scope: $scope = $rootScope.$new()});
             $location = _$location_;

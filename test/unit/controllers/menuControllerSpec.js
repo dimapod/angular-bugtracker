@@ -15,6 +15,7 @@ describe('menuController', function(){
             $provide.value('$location', $location);
         });
 
+        // fetch from injector
         inject(function($injector, $controller, $rootScope) {
             $controller('menuCtrl', {$scope: $scope = $rootScope.$new()});
         });
