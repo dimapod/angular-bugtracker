@@ -17,7 +17,7 @@ var bugTrackerApp = angular.module('bugTrackerApp', ['ngResource', 'ngSanitize']
             })
             .when('/archive', {
                 templateUrl: 'partials/archive.html',
-                controller: 'archiveCtrl'
+                controller: 'issueCtrl'
             })
             .when('/about', {
                 templateUrl: 'partials/about.html'
