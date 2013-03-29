@@ -22,7 +22,7 @@ describe('addIssueController', function(){
 
         // fetch from injector
         inject(function($injector, $controller, $rootScope, _$location_) {
-            $controller('addIssueCtrl', {$scope: $scope = $rootScope.$new()});
+            $controller('addCtrl', {$scope: $scope = $rootScope.$new()});
             $location = _$location_
         });
     });
