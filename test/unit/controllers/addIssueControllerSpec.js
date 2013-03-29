@@ -3,20 +3,19 @@
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
 describe('addIssueController', function(){
-    var $scope, user, issueServiceMock, $location
+    var $scope, user, issueResourceSpy, $location
 
     beforeEach(function() {
         // user service mock
         user = { login: "testLogin", name: "Test User Name" }
 
-        // issueService mock
+        // issueResource mock
         var issueResource = {
             save: function(issue) { }
         }
-        issueServiceMock = spyOn(issueResource, 'save')
+        issueResourceSpy = spyOn(issueResource, 'save')
 
         module(function($provide) {
-            //$provide.value('$location', $location);
             $provide.value('issueResource', issueResource);
             $provide.value('user', user);
         });
@@ -47,14 +46,14 @@ describe('addIssueController', function(){
     it('should not save new issue when submitting is already in progress', function() {
         $scope.submitting = true;
         $scope.add();
-        expect(issueServiceMock).not.toHaveBeenCalled();
+        expect(issueResourceSpy).not.toHaveBeenCalled();
     });
 
     it('should save a new issue', function() {
         $scope.add();
 
         expect($scope.submitting).toBe(true);
-        expect(issueServiceMock).toHaveBeenCalledWith($scope.issue);
+        expect(issueResourceSpy).toHaveBeenCalledWith($scope.issue);
     });
 
     it('should change location when issue is saved', function() {

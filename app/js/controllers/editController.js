@@ -4,11 +4,11 @@ bugTrackerApp.controller('editCtrl', function ($scope, user, $routeParams, $loca
     $scope.readonly = true;
     $scope.submitting = false;
 
-    // todo: fetch from resource
+    // Fetch from resource
     $scope.issue = issueResource.get({ id: $routeParams.issueId });
     $scope.newComment = { reporter: user.login, date: new Date(), comment: "" }
 
-    // todo: fetch from resource
+    // Fetch from resource
     $scope.comments = commentResource.query({ issueId: $routeParams.issueId });
 
     $scope.edit = function () {

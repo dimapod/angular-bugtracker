@@ -1,6 +1,6 @@
 'use strict';
 
-bugTrackerApp.controller('addIssueCtrl', function ($scope, user, issueResource, $location) {
+bugTrackerApp.controller('addIssueCtrl', function ($scope, user, $location, issueResource) {
     $scope.readonly = false;
     $scope.submitting = false;
 
