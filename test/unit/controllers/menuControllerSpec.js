@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('menu controller', function(){
+describe('menuController', function(){
     var $scope;
 
     beforeEach(function() {
@@ -23,6 +23,9 @@ describe('menu controller', function(){
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
     it('should have routeIs() method defined', function() {
+        // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
+        // debugger;
+
         expect($scope.routeIs).toBeDefined();
     });
 

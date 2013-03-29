@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('user controller', function(){
+describe('userController', function(){
     var $scope, user, $location
 
     beforeEach(function() {
@@ -22,6 +22,9 @@ describe('user controller', function(){
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
     it('should set login and name to $scope from user service', function() {
+        // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
+        // debugger;
+
         expect($scope.login).toBe('testLogin');
         expect($scope.name).toBe('Test User Name');
     });
