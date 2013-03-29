@@ -3,9 +3,9 @@
 bugTrackerApp.factory('user', function ($rootScope, localStorage) {
 
     var LOCAL_STORAGE_ID = 'configuration',
-        customerString = localStorage[LOCAL_STORAGE_ID];
+        userString = localStorage[LOCAL_STORAGE_ID];
 
-    var configuration = customerString ? JSON.parse(customerString) : {
+    var configuration = userString ? JSON.parse(userString) : {
         login: undefined,
         name: undefined
     };

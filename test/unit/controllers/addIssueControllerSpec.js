@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('addIssue controller', function(){
+describe('addIssueController', function(){
     var $scope, user, issueServiceMock, $location
 
     beforeEach(function() {
@@ -10,14 +10,14 @@ describe('addIssue controller', function(){
         user = { login: "testLogin", name: "Test User Name" }
 
         // issueService mock
-        var issueService = {
+        var issueResource = {
             save: function(issue) { }
         }
-        issueServiceMock = spyOn(issueService, 'save')
+        issueServiceMock = spyOn(issueResource, 'save')
 
         module(function($provide) {
             //$provide.value('$location', $location);
-            $provide.value('issueService', issueService);
+            $provide.value('issueResource', issueResource);
             $provide.value('user', user);
         });
 
@@ -30,6 +30,9 @@ describe('addIssue controller', function(){
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
     it('should set default values to $scope', function() {
+        // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
+        // debugger;
+
         expect($scope.readonly).toBe(false);
         expect($scope.submitting).toBe(false);
 

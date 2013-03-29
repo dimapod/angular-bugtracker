@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('issue controller', function(){
+describe('issueController', function(){
     var $scope, user, $location
 
     beforeEach(function() {
@@ -10,14 +10,14 @@ describe('issue controller', function(){
         user = { login: undefined, name: undefined }
 
         // issueService mock
-        var issueService = {
+        var issueResource = {
             query: function(issue) { }
         }
-        spyOn(issueService, 'query').andReturn([{id:1}, {id: 2}]);
+        spyOn(issueResource, 'query').andReturn([{id:1}, {id: 2}]);
 
         module(function($provide) {
             //$provide.value('$location', $location);
-            $provide.value('issueService', issueService);
+            $provide.value('issueResource', issueResource);
             $provide.value('user', user);
         });
 
