@@ -4,14 +4,7 @@
 //    use xdescribe(...) to disable given test suite
 describe('E2E test suite', function () {
 
-    function login() {
-        browser().navigateTo('/index.html#/user');
-        input('login').enter('e2eUser');
-        input('name').enter('User Name');
-        element(':button.btn-primary').click();
-    }
-
-    // Login testing
+    // Login testing (/user view)
     describe('login user', function() {
         beforeEach(function() {
             browser().navigateTo('/index.html#/user');
@@ -29,7 +22,7 @@ describe('E2E test suite', function () {
             expect(element(':button.btn-primary:disabled').count()).toEqual(1);
         });
 
-        it('should persist user information', function() {
+        it('should persist user information (to local storage)', function() {
             input('login').enter('e2eUser');
             input('name').enter('User Name');
             element(':button.btn-primary').click();
@@ -41,7 +34,7 @@ describe('E2E test suite', function () {
             expect(input('name').val()).toEqual('User Name');
         });
 
-        it('should go to issues when successfully login', function() {
+        it('should go to /issue when successfully logged', function() {
             input('login').enter('e2eUser');
             input('name').enter('User Name');
             element(':button.btn-primary').click();
@@ -52,12 +45,9 @@ describe('E2E test suite', function () {
 
     // Logout testing
     describe('logout user', function() {
-
-        beforeEach(function() {
-            login();
-        });
-
         it('should go to /user when logout', function() {
+            login();
+
             browser().navigateTo('/index.html#/issues');
             element('.btr-login a').click();
 
@@ -67,7 +57,6 @@ describe('E2E test suite', function () {
 
     // Routes testing
     describe('routes', function () {
-
         it('should redirect to /user when not logged in', function () {
             browser().navigateTo('/index.html');
             // erase local storage user info
@@ -77,17 +66,13 @@ describe('E2E test suite', function () {
             expect(browser().location().url()).toBe('/user');
         });
 
-        describe('default route', function () {
-            beforeEach(function() {
-                login();
-            });
+        it('should redirect to issue path when route is unknown', function () {
+            login();
 
-            it('should redirect to issue path when route is unknown', function () {
-                expect(browser().location().url()).toBe('/issue');
+            expect(browser().location().url()).toBe('/issue');
 
-                browser().navigateTo('#/unknown_root');
-                expect(browser().location().url()).toBe('/issue');
-            });
+            browser().navigateTo('#/unknown_root');
+            expect(browser().location().url()).toBe('/issue');
         });
     });
 
@@ -196,7 +181,6 @@ describe('E2E test suite', function () {
             expect(repeater('table tbody tr').count()).toBeGreaterThan(0);
             expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary)
         });
-
     });
 
     // Edit view testing
@@ -238,13 +222,13 @@ describe('E2E test suite', function () {
             select('issue.status').option('confirmed');
             element('#submit').click();
 
-            // Asserts
+            // Assert: first line in issue list has to be changed
             expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary);
             expect(element('table tbody tr:nth-child(1) td:nth-child(2)').text()).toEqual('confirmed')
         });
 
         // Comments
-        it('should add a comment', function() {
+        it('should add a comment when edit issue', function() {
             // Click on first issue in issue list
             element('table a:first').click();
 
@@ -262,7 +246,7 @@ describe('E2E test suite', function () {
         });
 
         // Resolved
-        it('should filter archived issues in /issue list', function() {
+        it('should add class .resolved to resolved issue', function() {
             // Click on first issue in issue list
             element('table a:first').click();
 
@@ -270,11 +254,11 @@ describe('E2E test suite', function () {
             select('issue.status').option('resolved');
             element('#submit').click();
 
-            // Assert:
+            // Assert: first line in issue list has to have class .resolved
             expect(element('table tbody tr:nth-child(1).resolved').count()).toEqual(1);
         });
 
-        // Archive
+        // Archived issues
         it('should filter archived issues in /issue list', function() {
             // Add another issue (n2)
             browser().navigateTo('/index.html#/add');
@@ -303,5 +287,12 @@ describe('E2E test suite', function () {
             expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary2);
         });
     });
+
+    function login() {
+        browser().navigateTo('/index.html#/user');
+        input('login').enter('e2eUser');
+        input('name').enter('User Name');
+        element(':button.btn-primary').click();
+    }
 
 });
