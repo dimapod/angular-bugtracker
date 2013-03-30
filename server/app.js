@@ -17,8 +17,10 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, '../')));
+  app.use(express.static(path.join(__dirname, '/../app')));
 
+  // only for running e2e tests
+  app.use('/test/', express.static(path.join(__dirname, '/../test')));
 });
 
 app.configure('development', function(){
