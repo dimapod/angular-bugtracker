@@ -4,6 +4,13 @@
 //    use xdescribe(...) to disable given test suite
 describe('E2E test suite', function () {
 
+    function login() {
+        browser().navigateTo('/index.html#/user');
+        input('login').enter('e2eUser');
+        input('name').enter('User Name');
+        element(':button.btn-primary').click();
+    }
+
     // Login testing
     describe('login user', function() {
         beforeEach(function() {
@@ -23,19 +30,19 @@ describe('E2E test suite', function () {
         });
 
         it('should persist user information', function() {
-            input('login').enter('userLogin');
+            input('login').enter('e2eUser');
             input('name').enter('User Name');
             element(':button.btn-primary').click();
 
             // reload the page
             browser().navigateTo('/index.html#/user');
 
-            expect(input('login').val()).toEqual('userLogin');
+            expect(input('login').val()).toEqual('e2eUser');
             expect(input('name').val()).toEqual('User Name');
         });
 
         it('should go to issues when successfully login', function() {
-            input('login').enter('userLogin');
+            input('login').enter('e2eUser');
             input('name').enter('User Name');
             element(':button.btn-primary').click();
 
@@ -47,15 +54,9 @@ describe('E2E test suite', function () {
     describe('logout user', function() {
 
         beforeEach(function() {
-            //login
-            browser().navigateTo('/index.html#/user');
-            input('login').enter('userLogin');
-            input('name').enter('User Name');
-            element(':button.btn-primary').click();
+            login();
         });
 
-        // -> use iit(...) to execute only one given test
-        //    use xit(...) to disable the given test
         it('should go to /user when logout', function() {
             browser().navigateTo('/index.html#/issues');
             element('.btr-login a').click();
@@ -78,11 +79,7 @@ describe('E2E test suite', function () {
 
         describe('default route', function () {
             beforeEach(function() {
-                //login
-                browser().navigateTo('/index.html#/user');
-                input('login').enter('userLogin');
-                input('name').enter('User Name');
-                element(':button.btn-primary').click();
+                login();
             });
 
             it('should redirect to issue path when route is unknown', function () {
@@ -98,11 +95,7 @@ describe('E2E test suite', function () {
     describe('menu navigation', function () {
 
         beforeEach(function () {
-            //login
-            browser().navigateTo('/index.html#/user');
-            input('login').enter('userLogin');
-            input('name').enter('User Name');
-            element(':button.btn-primary').click();
+            login();
         });
 
         describe('menu issue', function () {
@@ -121,8 +114,8 @@ describe('E2E test suite', function () {
                 element('#issue a').click();
 
                 // expect .active class to be set only for issue menu item
-                expect(element('.active').count()).toBe(1);
                 expect(element('#issue.active').count()).toBe(1);
+                expect(element('.active').count()).toBe(1);
             });
         });
 
@@ -138,8 +131,8 @@ describe('E2E test suite', function () {
                 element('#archive a').click();
 
                 // expect .active class to be set only for archive menu item
-                expect(element('.active').count()).toBe(1);
                 expect(element('#archive.active').count()).toBe(1);
+                expect(element('.active').count()).toBe(1);
             });
         });
 
@@ -155,9 +148,159 @@ describe('E2E test suite', function () {
                 element('#about a').click();
 
                 // expect .active class to be set only for about menu item
-                expect(element('.active').count()).toBe(1);
                 expect(element('#about.active').count()).toBe(1);
+                expect(element('.active').count()).toBe(1);
             });
+        });
+    });
+
+    // Add view testing
+    describe('add view', function () {
+        beforeEach(function() {
+            login();
+        });
+
+        it('should go to new issue view', function() {
+            // click on "Reporn new issue" button
+            element('a.btn-primary').click();
+
+            expect(browser().location().url()).toBe('/add');
+        });
+
+        it('should have reporter field filled in', function() {
+            browser().navigateTo('/index.html#/add');
+
+            expect(input('issue.reporter').val()).toEqual('e2eUser');
+        });
+
+        it('should fail to submit when mandatory fields not filled', function() {
+            browser().navigateTo('/index.html#/add');
+            element('#submit').click();
+
+            expect(browser().location().url()).toBe('/add');
+        });
+
+        it('should submit new issue', function() {
+            browser().navigateTo('/index.html#/add');
+
+            // Fill new issue fields
+            var summary = 'E2E Summary ' + new Date();
+            input('issue.product').enter('E2E Product');
+            input('issue.version').enter('E2E Version');
+            select('issue.severity').option('minor');
+            input('issue.summary').enter(summary);
+            input('issue.description').enter('E2E Description');
+            element('#submit').click();
+
+            expect(browser().location().url()).toBe('/issue');
+            expect(repeater('table tbody tr').count()).toBeGreaterThan(0);
+            expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary)
+        });
+
+    });
+
+    // Edit view testing
+    describe('Edit view', function () {
+        var summary;
+        beforeEach(function() {
+            login();
+
+            // Add new issue
+            browser().navigateTo('/index.html#/add');
+            summary = 'E2E Edit Summary ' + new Date();
+            input('issue.product').enter('E2E Edit Product');
+            input('issue.version').enter('E2E Edit Version');
+            select('issue.severity').option('minor');
+            input('issue.summary').enter(summary);
+            input('issue.description').enter('E2E Edit Description');
+            element('#submit').click();
+
+            browser().navigateTo('/index.html#/issue');
+        });
+
+        it('should have all fields filled in', function() {
+            // Click on first issue in issue list
+            element('table a:first').click();
+
+            expect(input('issue.reporter').val()).toEqual('e2eUser');
+            expect(input('issue.product').val()).toEqual('E2E Edit Product');
+            expect(input('issue.version').val()).toEqual('E2E Edit Version');
+            expect(input('issue.severity').val()).toEqual('minor');
+            expect(input('issue.summary').val()).toEqual(summary);
+            expect(input('issue.status').val()).toEqual('new');
+            expect(input('issue.description').val()).toEqual('E2E Edit Description');
+        });
+
+        it('should edit issue (change status to confirmed)', function() {
+            // Click on first issue in issue list
+            element('table a:first').click();
+
+            select('issue.status').option('confirmed');
+            element('#submit').click();
+
+            // Asserts
+            expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary);
+            expect(element('table tbody tr:nth-child(1) td:nth-child(2)').text()).toEqual('confirmed')
+        });
+
+        // Comments
+        it('should add a comment', function() {
+            // Click on first issue in issue list
+            element('table a:first').click();
+
+            // Fill comment field
+            var comment = "Comment " + new Date();
+            input('newComment.comment').enter(comment);
+            element('#submit').click();
+
+            // Click on first issue in issue list
+            element('table a:first').click();
+
+            // Asserts
+            expect(element('.comment textarea').text()).toEqual(comment)
+            expect(element('.comment b').text()).toEqual('e2eUser')
+        });
+
+        // Resolved
+        iit('should filter archived issues in /issue list', function() {
+            // Click on first issue in issue list
+            element('table a:first').click();
+
+            // Change status to Resolved
+            select('issue.status').option('resolved');
+            element('#submit').click();
+
+            // Assert:
+            expect(element('table tbody tr:nth-child(1).resolved').count()).toEqual(1);
+        });
+
+        // Archive
+        it('should filter archived issues in /issue list', function() {
+            // Add another issue (n2)
+            browser().navigateTo('/index.html#/add');
+            var summary2 = 'E2E Archive Summary ' + new Date();
+            input('issue.product').enter('E2E Archive Product');
+            input('issue.version').enter('E2E Archive Version');
+            select('issue.severity').option('minor');
+            input('issue.summary').enter(summary2);
+            input('issue.description').enter('E2E Archive Description');
+            element('#submit').click();
+
+            // Click on first issue in issue list
+            element('table a:first').click();
+
+            // Change status to Archived
+            select('issue.status').option('archived');
+            element('#submit').click();
+
+            // Assert: issue 2 has not to be in list
+            expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary);
+
+            // Go to archived list
+            browser().navigateTo('/index.html#/archive');
+
+            // Assert: issue n2 has has to be in archived list
+            expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary2);
         });
     });
 

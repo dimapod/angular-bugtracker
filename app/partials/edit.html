@@ -61,7 +61,7 @@
             </div>
 
             <div class="control-group">
-                <label class="control-label" for="severity">Status</label>
+                <label class="control-label" for="status">Status</label>
                 <div class="controls">
                     <select id="status" ng-model="issue.status">
                         <option value="new">New</option>
@@ -81,7 +81,7 @@
 
             <div class="control-group">
                 <div class="controls">
-                    <input type="submit" class="btn btn-primary" ng-disabled="submitting"></input>
+                    <input id="submit" type="submit" class="btn btn-primary" ng-disabled="submitting"></input>
                     <a class="btn" ng-href="#/issue">Cancel</a>
                 </div>
             </div>
