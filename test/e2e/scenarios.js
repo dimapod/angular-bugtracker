@@ -262,7 +262,7 @@ describe('E2E test suite', function () {
         });
 
         // Resolved
-        iit('should filter archived issues in /issue list', function() {
+        it('should filter archived issues in /issue list', function() {
             // Click on first issue in issue list
             element('table a:first').click();
 
