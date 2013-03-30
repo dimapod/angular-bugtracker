@@ -1,31 +1,70 @@
 'use strict';
 
-/* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
-
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
 describe('E2E test suite', function () {
 
-    beforeEach(function () {
-        browser().navigateTo('/index.html');
+    // Login testing
+    describe('user', function() {
+        beforeEach(function() {
+            browser().navigateTo('/index.html#/user');
+        });
+
+        // -> use iit(...) to execute only one given test
+        //    use xit(...) to disable the given test
+        it('should disable form submission button when empty', function() {
+            // -> use the fallowing command to pause e2e test
+            //pause();
+
+            input('login').enter('');
+            input('name').enter('');
+
+            expect(element(':button.btn-primary:disabled').count()).toEqual(1);
+        });
+
+        it('should persist user information', function() {
+            input('login').enter('userLogin');
+            input('name').enter('User Name');
+            element(':button.btn-primary').click();
+
+            // reload the page
+            browser().navigateTo('/index.html#/user');
+
+            expect(input('login').val()).toEqual('userLogin');
+            expect(input('name').val()).toEqual('User Name');
+        });
+
+        it('should go to issues when successfully login', function() {
+            input('login').enter('userLogin');
+            input('name').enter('User Name');
+            element(':button.btn-primary').click();
+
+            expect(browser().location().url()).toBe('/issue');
+        });
     });
 
-
+    // Routes testing
     describe('routes', function () {
 
-        ddescribe('default', function () {
-            // -> use iit(...) to execute only one given test
-            //    use xit(...) to disable the given test
-            it('should redirect to issue path when route is not known', function () {
+        it('should redirect to /user when not logged in', function () {
+            browser().navigateTo('/index.html');
+            // erase local storage user info
+            window.localStorage['configuration'] = '{}'
+            browser().navigateTo('/index.html#/issue');
 
-                // -> use the fallowing command to pause e2e test
-                //pause();
+            expect(browser().location().url()).toBe('/user');
+        });
 
-                input('login').enter('tuser');
-                input('name').enter('Test User');
+        describe('default route', function () {
+            beforeEach(function() {
+                //login
+                browser().navigateTo('/index.html#/user');
+                input('login').enter('userLogin');
+                input('name').enter('User Name');
                 element(':button.btn-primary').click();
+            });
 
-
+            it('should redirect to issue path when route is unknown', function () {
                 expect(browser().location().url()).toBe('/issue');
 
                 browser().navigateTo('#/unknown_root');
@@ -34,10 +73,20 @@ describe('E2E test suite', function () {
         });
     });
 
+    // Navigation menu testing
     describe('menu navigation', function () {
-        describe('menu configuration', function () {
+
+        beforeEach(function () {
+            //login
+            browser().navigateTo('/index.html#/user');
+            input('login').enter('userLogin');
+            input('name').enter('User Name');
+            element(':button.btn-primary').click();
+        });
+
+        describe('menu issue', function () {
             beforeEach(function () {
-                browser().navigateTo('../../app/index.html#/about');
+                browser().navigateTo('/index.html#/about');
             });
 
             it('should go to Issues view', function () {
@@ -57,10 +106,6 @@ describe('E2E test suite', function () {
         });
 
         describe('menu archive', function () {
-            beforeEach(function () {
-                browser().navigateTo('../../app/index.html#/about');
-            });
-
             it('should go to archive view', function () {
                 element('#archive a').click();
                 expect(browser().location().url()).toBe('/archive');
@@ -78,10 +123,6 @@ describe('E2E test suite', function () {
         });
 
         describe('menu about', function () {
-            beforeEach(function () {
-                browser().navigateTo('../../app/index.html#/issue');
-            });
-
             it('should go to issue view', function () {
                 element('#about a').click();
                 expect(browser().location().url()).toBe('/about');
