@@ -89,7 +89,7 @@
 
         <div class="legend">Comments ({{comments.length}})</div>
         <div class="comment" ng-repeat="comment in comments">
-            <div>By <b>{{comment.reporter}}</b> on {{comment.date | date}}</div>
+            <div>By <b>{{comment.reporter}}</b> on {{comment.date | date:'hh:mm dd/MM/yyyy'}}</div>
             <textarea class="span9" type="text" ng-bind="comment.comment" disabled></textarea>
         </div>
 
