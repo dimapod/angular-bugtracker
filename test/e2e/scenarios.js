@@ -5,7 +5,7 @@
 describe('E2E test suite', function () {
 
     // Login testing
-    describe('user', function() {
+    describe('login user', function() {
         beforeEach(function() {
             browser().navigateTo('/index.html#/user');
         });
@@ -40,6 +40,27 @@ describe('E2E test suite', function () {
             element(':button.btn-primary').click();
 
             expect(browser().location().url()).toBe('/issue');
+        });
+    });
+
+    // Logout testing
+    describe('logout user', function() {
+
+        beforeEach(function() {
+            //login
+            browser().navigateTo('/index.html#/user');
+            input('login').enter('userLogin');
+            input('name').enter('User Name');
+            element(':button.btn-primary').click();
+        });
+
+        // -> use iit(...) to execute only one given test
+        //    use xit(...) to disable the given test
+        it('should go to /user when logout', function() {
+            browser().navigateTo('/index.html#/issues');
+            element('.btr-login a').click();
+
+            expect(browser().location().url()).toBe('/user');
         });
     });
 
