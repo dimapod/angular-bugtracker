@@ -9,10 +9,7 @@ files = [
 
     'app/js/app.js',
     'app/js/**/*.js',
-    'test/unit/**/*.js',
-
-    // templates
-    'app/js/directives/**/*.html'
+    'test/unit/**/*.js'
 ];
 
 preprocessors = {

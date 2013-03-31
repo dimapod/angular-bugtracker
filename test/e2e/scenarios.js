@@ -178,7 +178,6 @@ describe('E2E test suite', function () {
             element('#submit').click();
 
             expect(browser().location().url()).toBe('/issue');
-            expect(repeater('table tbody tr').count()).toBeGreaterThan(0);
             expect(element('table tbody tr:nth-child(1) td:nth-child(5)').text()).toEqual(summary)
         });
     });
