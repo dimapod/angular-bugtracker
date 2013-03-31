@@ -10,6 +10,7 @@ bugTrackerApp.factory('user', function ($rootScope, localStorage) {
         name: undefined
     };
 
+    // EXO-2.3 ($watch the 'configuration' value)
     $rootScope.$watch(function () {
         return configuration;
     }, function () {

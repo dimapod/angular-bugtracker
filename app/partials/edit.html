@@ -1,7 +1,7 @@
 <div class="btr-panel" xmlns="http://www.w3.org/1999/html">
     <h4>Edit issue: #{{ issue.businessId }}</h4>
 
-    <form class="form-horizontal" ng-submit="edit()">
+    <form class="form-horizontal" ng-submit="edit()">  <!-- EXO-5.3 (ng-submit) -->
         <fieldset>
             <legend>Details</legend>
 
@@ -63,7 +63,7 @@
             <div class="control-group">
                 <label class="control-label" for="status">Status</label>
                 <div class="controls">
-                    <select id="status" ng-model="issue.status">
+                    <select id="status" ng-model="issue.status"> <!-- EXO-5.3 (ng-model) -->
                         <option value="new">New</option>
                         <option value="confirmed">Confirmed</option>
                         <option value="resolved">Resolved</option>
@@ -81,16 +81,16 @@
 
             <div class="control-group">
                 <div class="controls">
-                    <input id="submit" type="submit" class="btn btn-primary" ng-disabled="submitting"></input>
+                    <input id="submit" type="submit" class="btn btn-primary" ng-disabled="submitting">
                     <a class="btn" ng-href="#/issue">Cancel</a>
                 </div>
             </div>
         </fieldset>
 
         <div class="legend">Comments ({{comments.length}})</div>
-        <div class="comment" ng-repeat="comment in comments">
+        <div class="comment" ng-repeat="comment in comments">  <!-- EXO-5.4 (ng-repeat) -->
             <div>By <b>{{comment.reporter}}</b> on {{comment.date | date:'hh:mm dd/MM/yyyy'}}</div>
-            <textarea class="span9" type="text" ng-bind="comment.comment" disabled></textarea>
+            <textarea class="span9" type="text" ng-bind="comment.comment" disabled></textarea>  <!-- EXO-5.4 (ng-bind) -->
         </div>
 
     </form>

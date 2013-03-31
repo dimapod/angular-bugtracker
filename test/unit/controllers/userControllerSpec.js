@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('userController', function(){
+describe('EXO-2.x: userController', function(){
     var $scope, user, $location
 
     beforeEach(function() {
@@ -22,7 +22,7 @@ describe('userController', function(){
 
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
-    it('should set login and name to $scope from user service', function() {
+    it('EXO-2.2.1: should set login and name to $scope from user service', function() {
         // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
         // debugger;
 
@@ -34,17 +34,16 @@ describe('userController', function(){
         expect($scope.doLogin).toBeDefined();
     });
 
-    it('should set login and name to user service from $scope', function() {
+    it('EXO-2.2.2: should set login and name to user service from $scope', function() {
         $scope.doLogin("newLogin", "New User Name")
 
         expect(user.login).toBe('newLogin');
         expect(user.name).toBe('New User Name');
     });
 
-    it('should call $location.url() when doLogin()', function() {
+    it('EXO-2.2.3: should call $location.url() when doLogin()', function() {
         $scope.doLogin("newLogin", "New User Name")
         expect($location.url()).toEqual('/');
     });
-
 });
 

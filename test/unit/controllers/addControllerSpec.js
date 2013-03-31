@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('addIssueController', function(){
+describe('EXO-3.x: addIssueController', function(){
     var $scope, user, issueResourceSpy, $location
 
     beforeEach(function() {
@@ -29,7 +29,7 @@ describe('addIssueController', function(){
 
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
-    it('should set default values to $scope', function() {
+    it('EXO-3.2.1: should set default values to $scope', function() {
         // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
         // debugger;
 
@@ -38,6 +38,7 @@ describe('addIssueController', function(){
 
         expect($scope.issue.reporter).toBe("testLogin");
         expect($scope.issue.status).toBe("new");
+        expect($scope.issue.date).toBeDefined();
     });
 
     it('should have add() method defined', function() {
@@ -50,14 +51,14 @@ describe('addIssueController', function(){
         expect(issueResourceSpy).not.toHaveBeenCalled();
     });
 
-    it('should save a new issue', function() {
+    it('EXO-3.2.2: should save a new issue', function() {
         $scope.add();
 
         expect($scope.submitting).toBe(true);
         expect(issueResourceSpy).toHaveBeenCalledWith($scope.issue);
     });
 
-    it('should change location when issue is saved', function() {
+    it('EXO-3.2.2: should change location when issue is saved', function() {
         $scope.add();
         expect($location.url()).toEqual('/issue');
     });

@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('menuController', function(){
+describe('EXO-1.x: menuController', function(){
     var $scope;
 
     beforeEach(function() {
@@ -30,7 +30,8 @@ describe('menuController', function(){
         expect($scope.routeIs).toBeDefined();
     });
 
-    it('should verify actual path', function() {
+    // (fix it in menuController.js)
+    it('EXO-1.2: should verify actual path', function() {
         expect($scope.routeIs('/path')).toBeTruthy();
         expect($scope.routeIs('/strange')).toBeFalsy();
     });

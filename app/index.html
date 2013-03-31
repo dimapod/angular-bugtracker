@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="bugTrackerApp">
+<html ng-app="bugTrackerApp">  <!-- EXO-1.0 -->
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -20,17 +20,17 @@
                 <div class="navbar-inner">
                     <a class="brand" href="#/">iTracker</a>
                     <ul class="nav">
-                        <li id="issue" ng-class="{active: routeIs('/issue')}"><a href="#/issue">Issues</a></li>
-                        <li id="archive" ng-class="{active: routeIs('/archive')}"><a href="#/archive">Archive</a></li>
+                        <li id="issue" ng-class="{active: routeIs('/issue')}"><a href="#/issue">Issues</a></li>  <!-- EXO-1.3 -->
+                        <li id="archive" ng-class="{active: routeIs('/archive')}"><a href="#/archive">Archive</a></li>  <!-- EXO-1.3 -->
                     </ul>
 
                     <ul class="nav pull-right">
-                        <li id="about" ng-class="{active: routeIs('/about')}"><a href="#/about">About</a></li>
+                        <li id="about" ng-class="{active: routeIs('/about')}"><a href="#/about">About</a></li>  <!-- EXO-1.3 -->
                     </ul>
                 </div>
             </div>
 
-            <ng-view></ng-view>
+            <ng-view></ng-view>  <!-- EXO-1.1 -->
 
         </div>
 
@@ -53,7 +53,6 @@
 
         <script src="js/services/userService.js"></script>
 
-        <script src="js/directives/animate.js"></script>
         <script src="js/directives/btrLogin.js"></script>
         <script src="js/directives/btrRating.js"></script>
 

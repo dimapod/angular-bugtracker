@@ -4,7 +4,7 @@
     <h4>Issues</h4>
 
     <div>
-        <a class="btn btn-primary" ng-href="#/add">Report new issue</a>
+        <a id="addIssue" class="btn btn-primary" ng-href="#/add">Report new issue</a>
 
         <table class="table table-striped table-hover">
             <thead>
@@ -19,14 +19,14 @@
             </tr>
             </thead>
             <tbody>
-                <tr ng-class="issue.status" ng-repeat="issue in issues | archived:false | orderBy:'businessId':'true'">
+                <tr ng-class="issue.status" ng-repeat="issue in issues | archived:false | orderBy:'businessId':'true'">  <!-- EXO-6.1 (ng-class) -->
                     <td><a ng-href="#/edit/{{issue._id}}">{{issue.businessId}}</a></td>
                     <td>{{issue.status}}</td>
                     <td>{{issue.product}}</td>
                     <td>{{issue.version}}</td>
                     <td>{{issue.summary}}</td>
                     <td>{{issue.reporter}}</td>
-                    <td ng-class="issue.severity">{{issue.severity}}</td>
+                    <td ng-class="issue.severity">{{issue.severity}}</td>  <!-- EXO-6.2 (ng-class) -->
                 </tr>
             </tbody>
         </table>

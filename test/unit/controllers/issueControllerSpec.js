@@ -30,7 +30,7 @@ describe('issueController', function(){
 
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
-    it('should change location to /user when no login is defined', function() {
+    it('EXO-4.3: should change location to /user when no login is defined', function() {
         // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
         // debugger;
 
