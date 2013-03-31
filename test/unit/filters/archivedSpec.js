@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 //    use xdescribe(...) to disable given test suite
-describe('archived filter', function() {
+describe('EXO-6.3.x: archived filter', function() {
     var archived;
 
     var ISSUES = [ {status: 'new', id: 1},  {status: 'archived', id: 2},  {status: 'closed', id: 3}  ]
@@ -14,20 +14,20 @@ describe('archived filter', function() {
 
     // -> use iit(...) to execute only one given test
     //    use xit(...) to disable the given test
-    it('should have a in-progress filter', inject(function($filter) {
+    it('should have a archived filter defined', inject(function($filter) {
         // -> use the fallowing command to stop and debug unit test in chrome dev tools (chrome dev panel has to be opened)
         // debugger;
 
         expect($filter('archived')).toBeDefined();
     }));
 
-    it('should return only archived issues (status == "archived")', function () {
+    it('EXO-6.3.1: should return only archived issues (status == "archived")', function () {
         var filtered = archived(ISSUES, true);
         expect(filtered.length).toEqual(1);
         expect(filtered[0].id).toEqual(2);
     });
 
-    it('should return no archived issues (status != "archived")', function () {
+    it('EXO-6.3.1: should return all but archived issues (status != "archived")', function () {
         var filtered = archived(ISSUES, false);
         expect(filtered.length).toEqual(2);
         expect(filtered[0].id).toEqual(1);

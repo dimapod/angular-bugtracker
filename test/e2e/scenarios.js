@@ -317,7 +317,7 @@ describe('E2E test suite', function () {
         });
 
         // Archived issues
-        it('should filter archived issues in /issue list', function() {
+        it('EXO-6.3.2: should filter archived issues in /issue list', function() {
             // Add another issue (n2)
             browser().navigateTo('/index.html#/add');
             var summary2 = 'E2E Archive Summary ' + new Date();
